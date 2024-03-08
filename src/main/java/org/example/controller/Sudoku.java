@@ -1,2 +1,4 @@
-package org.example.controller;public class Sudoku {
+package org.example.controller;
+
+public class Sudoku {
 }
