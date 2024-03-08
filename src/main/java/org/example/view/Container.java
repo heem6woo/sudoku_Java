@@ -35,30 +35,28 @@ public class Container {
 
         Scanner textIn = new Scanner(input);
 
-        int row = 0, col = 0;
+        int index = 0;
 
         while (textIn.hasNext()) {
 
             String line = textIn.nextLine();
 
             if (line.isEmpty()) continue;
-            for(int i = 0; i < line.length(); ++i) {
+            for(int in = 0; in < line.length(); ++in) {
 
-                char curr = line.charAt(i);
+                char curr = line.charAt(in);
 
                 if ( '1' <= curr && curr <= '9') {
-                    cells.get(col).setValue((int) (curr - '0'));
-                    col += 1;
+                    cells.get(index).setValue((int) (curr - '0'));
+                    index += 1;
                 } else if (curr == '-') {
-                    cells.get(col).setValue(0);
-                    col += 1;
+                    cells.get(index).setValue(0);
+                    index += 1;
                 }
 
             }
 
-            row += 1;
         }
-
 
     }
 
