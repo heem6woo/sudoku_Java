@@ -1,11 +1,11 @@
 package org.example.view;
 
+import org.example.Main;
 import org.example.Position;
 import org.example.model.Cell;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 import java.io.File;
@@ -19,28 +19,23 @@ public class Container {
         // y:1 x: 0 - 8 = 9 - 17
         cells = new ArrayList<Cell>();
 
-        for(int i = 0; i < 9; ++i) {
+        for(int i = 0; i < Main.GRID; ++i) {
 
-            for(int j = 0; j < 9; ++j) {
-
+            for(int j = 0; j < Main.GRID; ++j) {
 
                 cells.add(new Cell(i,j, 0));
-
             }
 
-
         }
-        for(int i = 0; i < 0; ++i) {
+
+        for(int i = 0; i < Main.GRID; ++i) {
             //List<Cell> row = cells.subList(i*9, i*9+ 9);
-            for(int j = 0; j < 9; ++j) {
+            for(int j = 0; j < Main.GRID; ++j) {
 
                 Cell cell = cells.get(i + j);
                 cell.setRow(cells.subList(i*9, i*9+ 9));
             }
         }
-
-
-
 
     }
 
@@ -83,6 +78,7 @@ public class Container {
     public void printRow(int index) {
         Cell c = cells.get(index);
         System.out.println(c.getRow());
+
     }
     public void printCol(int index) {
         List<Cell> col =  cells.get(index).getRow();
@@ -95,10 +91,10 @@ public class Container {
 
     public void printContainer() {
 
-        for(int i = 0; i < 9; ++i) {
+        for(int i = 0; i < Main.GRID; ++i) {
 
             // print a row
-            for(int j =0; j < 9; ++j) {
+            for(int j =0; j < Main.GRID; ++j) {
 
                 if (j % 3 == 0) {
                     System.out.print(' ');
@@ -118,7 +114,5 @@ public class Container {
 
         }
     }
-
-
 
 }

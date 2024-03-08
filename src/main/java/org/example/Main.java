@@ -5,6 +5,8 @@ import org.example.view.Container;
 import java.io.FileNotFoundException;
 
 public class Main {
+
+    public static int GRID = 9;
     public static void main(String[] args){
 
         Container board = new Container();

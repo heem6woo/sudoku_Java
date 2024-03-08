@@ -47,7 +47,7 @@ public class Cell {
     }
 
     public List<Cell> getRow() {
-        return this.row;
+        return row;
     }
 
     public List<Cell> getCol() {
