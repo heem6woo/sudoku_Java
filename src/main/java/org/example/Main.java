@@ -10,12 +10,15 @@ public class Main {
         Container board = new Container();
         try {
             board.readInput("samples/test1.in");
+            board.printContainer();
+
+            board.printRow(0);
 
         } catch (FileNotFoundException ex) {
             System.err.println("File is not found!");
         }
 
-        board.printContainer();
+
 
     }
 }

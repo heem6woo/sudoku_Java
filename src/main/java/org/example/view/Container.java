@@ -1,10 +1,12 @@
 package org.example.view;
 
+import org.example.Position;
 import org.example.model.Cell;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Scanner;
 import java.io.File;
 
@@ -21,11 +23,29 @@ public class Container {
 
             for(int j = 0; j < 9; ++j) {
 
-                cells.add(new Cell(i,j,0));
 
+                cells.add(new Cell(i,j, 0));
+
+            }
+
+
+        }
+        for(int i = 0; i < 0; ++i) {
+            //List<Cell> row = cells.subList(i*9, i*9+ 9);
+            for(int j = 0; j < 9; ++j) {
+
+                Cell cell = cells.get(i + j);
+                cell.setRow(cells.subList(i*9, i*9+ 9));
             }
         }
 
+
+
+
+    }
+
+    public ArrayList<Cell> getContainer() {
+        return cells;
     }
 
     public void readInput(String text) throws FileNotFoundException {
@@ -60,10 +80,24 @@ public class Container {
 
     }
 
+    public void printRow(int index) {
+        Cell c = cells.get(index);
+        System.out.println(c.getRow());
+    }
+    public void printCol(int index) {
+        List<Cell> col =  cells.get(index).getRow();
+        System.out.println(col);
+    }
+    public void printBox(int index) {
+        List<Cell> box =  cells.get(index).getRow();
+        System.out.println(box);
+    }
+
     public void printContainer() {
 
         for(int i = 0; i < 9; ++i) {
 
+            // print a row
             for(int j =0; j < 9; ++j) {
 
                 if (j % 3 == 0) {
@@ -79,6 +113,7 @@ public class Container {
 
             }
 
+            // print new line
             System.out.println();
 
         }
