@@ -43,6 +43,10 @@ public class Container {
         return cells;
     }
 
+    public Cell getCell(int index) {
+        return cells.get(index);
+    }
+
     public void readInput(String text) throws FileNotFoundException {
 
 
@@ -75,19 +79,24 @@ public class Container {
 
     }
 
-    public void printRow(int index) {
+    public void printConstraint(int index, Main.CONSTRAINTS constraint) {
         Cell c = cells.get(index);
-        System.out.println(c.getRow());
+        int i = 0;
+        List<Cell> target = (constraint == Main.CONSTRAINTS.ROW) ? c.getRow() :
+                ((constraint == Main.CONSTRAINTS.BOX) ? c.getCol() : c.getBox());
+        for(Cell t: c.getRow()) {
+            if (i % 3 == 0) System.out.print(' ');
+            if (t.getValue() == 0) {
+                System.out.print('_');
+            } else {
+                System.out.print(t.getValue());
+            }
+            ++i;
+        }
+        System.out.println();
 
     }
-    public void printCol(int index) {
-        List<Cell> col =  cells.get(index).getRow();
-        System.out.println(col);
-    }
-    public void printBox(int index) {
-        List<Cell> box =  cells.get(index).getRow();
-        System.out.println(box);
-    }
+
 
     public void printContainer() {
 
@@ -113,6 +122,10 @@ public class Container {
             System.out.println();
 
         }
+    }
+
+    public boolean isValid(int index, int val) {
+        return cells.get(index).isValid(val);
     }
 
 }

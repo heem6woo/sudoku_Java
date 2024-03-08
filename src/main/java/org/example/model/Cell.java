@@ -57,4 +57,12 @@ public class Cell {
     public List<Cell> getBox() {
         return this.box;
     }
+
+    public boolean isValid(int value) {
+        if (this.value != 0 || this.row.contains(value)
+                || this.row.contains(value) || this.row.contains(value)) {
+            return false;
+        }
+        return true;
+    }
 }
