@@ -47,7 +47,7 @@ public class Cell {
     }
 
     public List<Cell> getRow() {
-        return row;
+        return this.row;
     }
 
     public List<Cell> getCol() {
@@ -59,8 +59,12 @@ public class Cell {
     }
 
     public boolean isValid(int value) {
-        if (this.value != 0 || this.row.contains(value)
-                || this.row.contains(value) || this.row.contains(value)) {
+        if (this.value != 0 ||
+                (value > 0 && value <= 9) ||
+                this.row.contains(value) ||
+                this.col.contains(value) ||
+                this.box.contains(value))
+        {
             return false;
         }
         return true;

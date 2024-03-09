@@ -27,15 +27,68 @@ public class Container {
             }
 
         }
-
+        // Set Row
         for(int i = 0; i < Main.GRID; ++i) {
-            //List<Cell> row = cells.subList(i*9, i*9+ 9);
+            List<Cell> row = cells.subList(i*9, i*9+ 9);
+
             for(int j = 0; j < Main.GRID; ++j) {
 
-                Cell cell = cells.get(i + j);
-                cell.setRow(cells.subList(i*9, i*9+ 9));
+                Cell cell = cells.get((i * 9) + j);
+                cell.setRow(row);
             }
         }
+
+        // Set Col
+        for(int i = 0; i < Main.GRID; ++i) {
+            List<Cell> col = new ArrayList<>();
+
+            for(int j = 0; j < Main.GRID; ++j) {
+
+                Cell cell = cells.get((j * 9) + i);
+
+                col.add(cell);
+            }
+
+            for(int j = 0; j < Main.GRID; ++j) {
+
+                Cell cell = cells.get((j * 9) + i);
+
+                cell.setCol(col);
+            }
+
+        }
+
+        List<Cell> box1 = new ArrayList<>();
+        List<Cell> box2 = new ArrayList<>();
+        List<Cell> box3 = new ArrayList<>();
+        // Set Box
+        for(int i = 0; i < Main.GRID; ++i) {
+
+            if (i != 0 && i % 3 == 0) {
+                box1 = new ArrayList<>();
+                box2 = new ArrayList<>();
+                box3 = new ArrayList<>();
+            }
+            for(int j = 0; j < Main.GRID; ++j) {
+
+                Cell cell = cells.get((i * 9) + j);
+
+                if(i >= 0 && i < 3) {
+                    if (cell.getBox() == null) cell.setBox(box1);
+                    box1.add(cell);
+                } else if(i >= 3 && i < 6) {
+                    if (cell.getBox() == null) cell.setBox(box2);
+                    box2.add(cell);
+                } else if (i >= 6 && i < 9) {
+                    if (cell.getBox() == null) cell.setBox(box2);
+                    box3.add(cell);
+                }
+
+            }
+
+
+        }
+
 
     }
 
@@ -83,8 +136,9 @@ public class Container {
         Cell c = cells.get(index);
         int i = 0;
         List<Cell> target = (constraint == Main.CONSTRAINTS.ROW) ? c.getRow() :
-                ((constraint == Main.CONSTRAINTS.BOX) ? c.getCol() : c.getBox());
-        for(Cell t: c.getRow()) {
+                ((constraint == Main.CONSTRAINTS.COL) ? c.getCol() : c.getBox());
+        System.out.println(target.size());
+        for(Cell t: target) {
             if (i % 3 == 0) System.out.print(' ');
             if (t.getValue() == 0) {
                 System.out.print('_');
@@ -109,7 +163,7 @@ public class Container {
                     System.out.print(' ');
                 }
 
-                int value = cells.get(i + j).getValue();
+                int value = cells.get((i * 9) + j).getValue();
                 if (value == 0) {
                     System.out.print('_');
                 } else {
