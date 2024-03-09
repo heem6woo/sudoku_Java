@@ -1,5 +1,7 @@
 package org.example.model;
 import org.example.Position;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class Cell {
@@ -18,6 +20,14 @@ public class Cell {
 
         value = val;
 
+    }
+    @Override
+    public boolean equals(Object o) {
+        if(o instanceof Cell){
+            int toCompare = ((Cell) o).value;
+            return value == toCompare;
+        }
+        return false;
     }
 
     public void setValue(int val) {
@@ -59,11 +69,12 @@ public class Cell {
     }
 
     public boolean isValid(int value) {
+        Cell temp = new Cell(-1,-1, value);
         if (this.value != 0 ||
                 (value > 0 && value <= 9) ||
-                this.row.contains(value) ||
-                this.col.contains(value) ||
-                this.box.contains(value))
+                this.row.contains(temp) ||
+                this.col.contains(temp) ||
+                this.box.contains(temp))
         {
             return false;
         }
