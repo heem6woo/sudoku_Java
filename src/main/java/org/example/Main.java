@@ -3,7 +3,9 @@ package org.example;
 import org.example.view.Container;
 import org.example.controller.Controller;
 
+import java.io.EOFException;
 import java.io.FileNotFoundException;
+import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class Main {
@@ -23,16 +25,25 @@ public class Main {
 
         Scanner cmd = new Scanner(System.in);
 
-        System.out.println("Please select the sudoku board:");
-        System.out.println("Samples are samples/test1.in, samples/test2.in, samples/test3.in");
-
-        String sudoku = cmd.next();
-
 
 
         while (true) {
+
+            System.out.println("Please select the sudoku board:");
+            System.out.println("To choose the default sudoku, please type 'default'.");
+            System.out.println("Samples are samples/test1.in, samples/test2.in, samples/test3.in");
+            System.out.println("To exit the program, please type the exit or ctrl + D(EOF).");
+
+            String ctr = cmd.next();
+
             try {
-                board.readInput(sudoku);
+
+                if (ctr == "exit") break;
+
+                if (ctr == "default") {
+                    ctr = "samples/test1.in";
+                }
+                board.readInput(ctr);
 
                 board.printContainer();
 
@@ -42,7 +53,7 @@ public class Main {
 
                 while(cmd.hasNext()) {
 
-                    String ctr = cmd.next();
+                    ctr = cmd.next();
 
                     switch (ctr) {
                         case("exit"):
@@ -50,7 +61,7 @@ public class Main {
                         case("help"):
                             System.out.println("row: 0 - 8, col: 0 - 8, value: 1 - 9");
                             System.out.println("exit - to exit the game");
-                            System.out.println("set i j v - to set v(value) on i(row), j(col)");
+                            System.out.println("set i j v - to set v(value) on i(row), j(col) cell");
                             System.out.println("print - to print the sudoku board");
                             break;
                         case("set"):
@@ -69,7 +80,6 @@ public class Main {
 
             } catch (FileNotFoundException ex) {
                 System.err.println("File is not found!");
-                break;
             } catch (IndexOutOfBoundsException ex) {
                 System.err.println("Invalid value!");
             }

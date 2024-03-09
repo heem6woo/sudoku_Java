@@ -49,7 +49,7 @@ public class Container {
 
     public void readInput(String text) throws FileNotFoundException {
 
-
+        System.out.println(text);
         File input = new File(text);
 
         Scanner textIn = new Scanner(input);
