@@ -27,7 +27,18 @@ public class Controller {
     }
 
     public void printBoard() {
+
         board.printContainer();
+    }
+
+    public void printCellRow(int row, int col) {
+        board.printConstraint((row * 9) + col, Main.CONSTRAINTS.ROW);
+    }
+    public void printCellBox(int row, int col) {
+        board.printConstraint((row * 9) + col, Main.CONSTRAINTS.BOX);
+    }
+    public void printCellCol(int row, int col) {
+        board.printConstraint((row * 9) + col, Main.CONSTRAINTS.COL);
     }
 
 
