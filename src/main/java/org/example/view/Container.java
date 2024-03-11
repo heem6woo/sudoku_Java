@@ -61,10 +61,27 @@ public class Container {
         List<Cell> box1 = new ArrayList<>();
         List<Cell> box2 = new ArrayList<>();
         List<Cell> box3 = new ArrayList<>();
+
         // Set Box
         for(int i = 0; i < Main.GRID; ++i) {
+            if (i != 0 && (i + 1) % 3 == 0) {
 
-            if (i != 0 && i % 3 == 0) {
+                System.out.println(box1);
+                System.out.println(box2);
+                System.out.println(box3);
+                for(int j = 0; j < Main.GRID; ++j) {
+
+                    Cell cell = cells.get((i * 9) + j);
+
+                    if(j >= 0 && j < 3) {
+                        cell.setBox(new ArrayList<Cell>(box1));
+                    } else if(j >= 3 && j < 6) {
+                        cell.setBox(new ArrayList<Cell>(box2));
+                    } else if (j >= 6 && j < 9) {
+                        cell.setBox(new ArrayList<Cell>(box3));
+                    }
+
+                }
                 box1 = new ArrayList<>();
                 box2 = new ArrayList<>();
                 box3 = new ArrayList<>();
@@ -72,22 +89,31 @@ public class Container {
             for(int j = 0; j < Main.GRID; ++j) {
 
                 Cell cell = cells.get((i * 9) + j);
-
-                if(i >= 0 && i < 3) {
-                    if (cell.getBox() == null) cell.setBox(box1);
+                if(j >= 0 && j < 3) {
                     box1.add(cell);
-                } else if(i >= 3 && i < 6) {
-                    if (cell.getBox() == null) cell.setBox(box2);
+                } else if(j >= 3 && j < 6) {
                     box2.add(cell);
-                } else if (i >= 6 && i < 9) {
-                    if (cell.getBox() == null) cell.setBox(box2);
+                } else if (j >= 6 && j < 9) {
                     box3.add(cell);
                 }
 
             }
 
-
         }
+
+        /*
+        for (int i = 0; i < Main.GRID / 3; ++i) {
+
+            List<Cell> box = new ArrayList<>();
+
+            for (int j = 0; i < Main.GRID; ++i) {
+
+
+            }
+        }
+         */
+
+
 
 
     }
@@ -137,7 +163,7 @@ public class Container {
         int i = 0;
         List<Cell> target = (constraint == Main.CONSTRAINTS.ROW) ? c.getRow() :
                 ((constraint == Main.CONSTRAINTS.COL) ? c.getCol() : c.getBox());
-        System.out.println(target.size());
+        if(target == null) System.err.println(constraint + " is null!");
         for(Cell t: target) {
             if (i % 3 == 0) System.out.print(' ');
             if (t.getValue() == 0) {
