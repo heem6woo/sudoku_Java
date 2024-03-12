@@ -58,63 +58,47 @@ public class Container {
 
         }
 
-        List<Cell> box1 = new ArrayList<>();
-        List<Cell> box2 = new ArrayList<>();
-        List<Cell> box3 = new ArrayList<>();
 
-        // Set Box
-        for(int i = 0; i < Main.GRID; ++i) {
-            if (i != 0 && (i + 1) % 3 == 0) {
-
-                System.out.println(box1);
-                System.out.println(box2);
-                System.out.println(box3);
-                for(int j = 0; j < Main.GRID; ++j) {
-
-                    Cell cell = cells.get((i * 9) + j);
-
-                    if(j >= 0 && j < 3) {
-                        cell.setBox(new ArrayList<Cell>(box1));
-                    } else if(j >= 3 && j < 6) {
-                        cell.setBox(new ArrayList<Cell>(box2));
-                    } else if (j >= 6 && j < 9) {
-                        cell.setBox(new ArrayList<Cell>(box3));
-                    }
-
-                }
-                box1 = new ArrayList<>();
-                box2 = new ArrayList<>();
-                box3 = new ArrayList<>();
-            }
-            for(int j = 0; j < Main.GRID; ++j) {
-
-                Cell cell = cells.get((i * 9) + j);
-                if(j >= 0 && j < 3) {
-                    box1.add(cell);
-                } else if(j >= 3 && j < 6) {
-                    box2.add(cell);
-                } else if (j >= 6 && j < 9) {
-                    box3.add(cell);
-                }
-
-            }
-
-        }
-
-        /*
-        for (int i = 0; i < Main.GRID / 3; ++i) {
-
-            List<Cell> box = new ArrayList<>();
-
-            for (int j = 0; i < Main.GRID; ++i) {
-
-
-            }
-        }
+        /**
+         * 0123..(25)(26)
+         * i = 0       0-2, 9-11, 18-20
+         *     1        3-5, 12-14,21-23
+         *     2        6-8, 15-17,24-26
+         *
+         *      3       27-29,
+         *      4       30-32,
+         *      5      33-35      ,51-53
+         *
+         *      6       54
+         *
+         *
+         *
+         *         000...000/000...000/000...000
          */
 
+        int[] firstI = new int[]{0, 3, 6, 27, 30, 33, 54, 57, 60};
+
+        for (int i = 0; i < Main.GRID ; ++i) {
+
+            List<Cell> box = new ArrayList<>();
+            int index;
+            for(int j = 0; j < Main.GRID/ 3 ; ++j) {
+                index = firstI[i] + (j * 9);
+                box.addAll(cells.subList(index, index + 3));
+            }
+
+            for(int j = 0; j < Main.GRID/3 ; ++j) {
+
+                for(int k = 0; k < Main.GRID/3; ++k) {
+                    index = firstI[i] + (j * 9) + k;
+                    Cell cell = cells.get(index);
+                    cell.setBox(box);
+                }
+
+            }
 
 
+        }
 
     }
 

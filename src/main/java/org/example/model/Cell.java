@@ -9,9 +9,7 @@ public class Cell {
 
     int value;
 
-    List<Cell> row;
-    List<Cell> col;
-    List<Cell> box;
+    List<Cell> row, col, box;
 
 
     public Cell(int x, int y, int val) {
@@ -52,9 +50,7 @@ public class Cell {
         this.col = col;
     }
 
-    public void setBox(List<Cell> Box) {
-        this.box = box;
-    }
+    public void setBox(List<Cell> box) { this.box = box;}
 
     public List<Cell> getRow() {
         return this.row;
