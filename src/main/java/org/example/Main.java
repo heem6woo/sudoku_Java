@@ -23,7 +23,8 @@ public class Main {
     public static String USAGE = "row: 0 - 8, col: 0 - 8, value: 1 - 9\n" +
             "exit - to exit the game\n" +
             "set i j v - to set v(value) on i(row), j(col) cell\n" +
-            "print - to print the sudoku board";
+            "print, p - to print the sudoku board\n" +
+            "print_contraint, pc i j- to print the costraints(row, col, and box) for i,j cell";
 
 
 
@@ -105,6 +106,9 @@ public class Main {
                 }
             } catch (IndexOutOfBoundsException ex) {
                 System.err.println("Invalid value!");
+            } catch (Container.Over ex) {
+                System.out.println(ex.getMsg());
+                break;
             } catch (Exception ex) {
                 System.out.println(USAGE);
             }

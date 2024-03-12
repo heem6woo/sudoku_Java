@@ -13,6 +13,19 @@ import java.io.File;
 
 public class Container {
     private ArrayList<Cell> cells;
+    static int completedCells = 0;
+
+    public class Over extends Exception {
+        public String msg;
+
+        public Over(String msg) {
+            this.msg = msg;
+        }
+
+        public String getMsg() {
+            return msg;
+        }
+    }
 
     public Container() {
         // y:0 x: 0 - 8 = 0 - 8
@@ -130,6 +143,7 @@ public class Container {
 
                 if ( '1' <= curr && curr <= '9') {
                     cells.get(index).setValue((int) (curr - '0'));
+                    completedCells += 1;
                     index += 1;
                 } else if (curr == '-') {
                     cells.get(index).setValue(0);
@@ -190,6 +204,20 @@ public class Container {
 
     public boolean isValid(int index, int val) {
         return cells.get(index).isValid(val);
+    }
+
+    public int getCompletedCells() {
+        return completedCells;
+    }
+
+    public void iCompletedCells() throws Over {
+        completedCells += 1;
+        if (completedCells == 81) {
+            throw new Over("Game is Over");
+        }
+    }
+    public void dCompletedCells() {
+        completedCells -= 1;
     }
 
 }

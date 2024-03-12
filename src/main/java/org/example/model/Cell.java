@@ -66,8 +66,7 @@ public class Cell {
 
     public boolean isValid(int value) {
         Cell temp = new Cell(-1,-1, value);
-        if (this.value != 0 ||
-                (value > 0 && value <= 9) ||
+        if (!(value >= 1 && value <= 9) ||
                 this.row.contains(temp) ||
                 this.col.contains(temp) ||
                 this.box.contains(temp))
@@ -75,5 +74,21 @@ public class Cell {
             return false;
         }
         return true;
+    }
+
+    /**
+     * Used for testing equals override method
+     * @param args
+     */
+    public static void main(String[] args) {
+        ArrayList<Cell> cells = new ArrayList<>();
+        Cell c1 = new Cell(0,0,2);
+        Cell c2 = new Cell(1,1, 3);
+        Cell temp = new Cell(-1,-1, 1);
+
+        cells.add(c1);
+        cells.add(c2);
+
+        System.out.println(cells.contains(temp));
     }
 }
